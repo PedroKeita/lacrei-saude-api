@@ -1,0 +1,31 @@
+[project]
+name = "lacrei-saude-api"
+version = "0.1.0"
+description = "API de Gerenciamento de Consultas Médicas - Lacrei Saúde"
+authors = [
+    {name = "Pedro Lucas Farias De Melo"}
+]
+
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "django>=5.1,<6.0",
+    "djangorestframework>=3.15,<4.0",
+    "djangorestframework-simplejwt>=5.3,<6.0",
+    "django-environ>=0.11,<1.0",
+    "django-cors-headers>=4.3,<5.0",
+    "psycopg2-binary>=2.9,<3.0"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.2,<10.0.0)",
+    "pytest-django (>=4.11.1,<5.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)",
+    "black (>=26.1.0,<27.0.0)"
+]
