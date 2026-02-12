@@ -42,14 +42,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
-    "professionals",
-    "appointments",
-    "users",
+
 
     "rest_framework",
     "django_filters",
     "corsheaders",
+]
+
+INSTALLED_APPS += [
+    "professionals",
+    "appointments",
+    "users",
 ]
 
 MIDDLEWARE = [
