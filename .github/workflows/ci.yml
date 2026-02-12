@@ -1,0 +1,60 @@
+name: Django CI/CD Pipeline
+
+on: 
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: lacrei_saude_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password_postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install Dependencies
+      run: |
+        poetry install
+
+    - name: Run Lint (Qualidade de Código)
+      run: |
+        poetry run python -m compileall . 
+
+    - name: Run Tests 
+      env:
+        DB_NAME: lacrei_saude_db
+        DB_USER: postgres
+        DB_PASSWORD: password_postgres
+        DB_HOST: localhost
+        DB_PORT: 5432
+        SECRET_KEY: "test-key-for-ci"
+      run: |
+        poetry run python manage.py test   
+          
