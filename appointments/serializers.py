@@ -3,7 +3,7 @@ from .models import Appointment
 from django.utils import timezone
 
 class AppointmentSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Appointment
         fields = "__all__"
 
@@ -14,11 +14,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
     
     def validate(self, data):
         professional = data.get('professional')
-        data = data.get('date')
+        appointment_data = data.get('date')
 
         existing_appointment = Appointment.objects.filter(
             professional=professional,
-            date=date
+            date=appointment_data
         ).exclude(pk=self.instance.pk if self.instance else None)
 
         if existing_appointment.exists():
