@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .models import Appointment
 from .serializers import AppointmentSerializer
+from appointments.models import Appointment
 
 class AppointmentViewSet(ModelViewSet):
 
