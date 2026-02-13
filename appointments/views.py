@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Appointment
 from .serializers import AppointmentSerializer
 from appointments.models import Appointment
+from professionals.models import Professional
 
 class AppointmentViewSet(ModelViewSet):
 
