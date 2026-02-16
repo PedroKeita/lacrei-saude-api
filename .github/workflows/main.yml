@@ -97,12 +97,24 @@ jobs:
           docker build -t lacrei-saude-api .
 
 
-  deploy:
-    name: Deploy 
+ deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     needs: build
-
     steps:
-      - name: Deploy step
-        run: |
-          echo "Deploy executado com sucesso"
+      - uses: actions/checkout@v3
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/develop'
+        run: railway upsert --detach -e staging
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        run: railway upsert --detach -e production
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
