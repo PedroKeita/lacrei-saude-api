@@ -26,12 +26,14 @@ if ENV == "production":
 else:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
-sentry_sdk.init(
-    dsn=os.getenv("SENTRY_DSN"),
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=1.0,
-    send_default_pii=True
-)
+SENTRY_DSN = os.getenv("SENTRY_DSN")
+
+if ENV == "production" and SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=1.0,
+        send_default_pii=True,
+    )
 
 # Application definition
 
