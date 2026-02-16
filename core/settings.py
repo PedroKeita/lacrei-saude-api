@@ -17,14 +17,14 @@ ENV = os.getenv("ENV", "development")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true" or ENV == "development"
 
 ALLOWED_HOSTS = ["*"]
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 if ENV in ["production", "staging"]:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host != "*"]
+    CSRF_TRUSTED_ORIGINS = ["https://*.railway.app", "https://*.up.railway.app"]
 
 SENTRY_DSN = os.getenv("SENTRY_DSN")
 if SENTRY_DSN:
