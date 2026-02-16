@@ -23,7 +23,7 @@ ENV = os.getenv("ENV", "development")
 DEBUG = ENV != "production"
 
 if ENV == "production":
-    ALLOWED_HOSTS = ["seu-app.up.railway.app"]
+    ALLOWED_HOSTS = ["lacrei-saude-api.railway.app"]
 else:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
