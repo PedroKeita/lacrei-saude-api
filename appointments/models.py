@@ -11,7 +11,7 @@ class Appointment(models.Model):
         ('COMPLETED', 'Concluído')
     ]
     date = models.DateTimeField()
-    professional = models.ForeignKey(Professional, on_delete=models.CASCADE, related_name = "appointments")
+    professional = models.ForeignKey(Professional, on_delete=models.PROTECT, related_name = "appointments")
 
     customer_name = models.CharField(max_length=150, help_text="Nome do cliente", default="Cliente")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
