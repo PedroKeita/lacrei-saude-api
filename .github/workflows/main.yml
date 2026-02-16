@@ -9,7 +9,7 @@ on:
 jobs:
 
   lint:
-    name: Lint (Qualidade de Código)
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
