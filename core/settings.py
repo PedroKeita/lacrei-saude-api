@@ -16,7 +16,7 @@ ENV = os.getenv("ENV", "development")
 
 DEBUG = os.getenv("DEBUG", "False").lower() == "true" or ENV == "development"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
+ALLOWED_HOSTS = ["*"]
 
 
 if ENV in ["production", "staging"]:
